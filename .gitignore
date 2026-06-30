@@ -1,0 +1,27 @@
+# Node.js
+node_modules/
+dist/
+*.js.map
+
+# Environment
+.env
+*.env.local
+
+# Python legacy (removed)
+__pycache__/
+*.pyc
+env/
+.venv/
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Uploads temp dir
+server/uploads/*
+!server/uploads/.gitkeep
