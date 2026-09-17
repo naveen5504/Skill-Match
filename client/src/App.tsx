@@ -5,11 +5,13 @@ import LandingPage from './pages/LandingPage';
 import AnalyzePage from './pages/AnalyzePage';
 import ResultsPage from './pages/ResultsPage';
 import { VscGithubInverted } from 'react-icons/vsc';
-import { HiHome, HiDocumentMagnifyingGlass } from 'react-icons/hi2';
+import { HiHome, HiDocumentMagnifyingGlass, HiSun, HiMoon } from 'react-icons/hi2';
+import { useTheme } from './contexts/ThemeContext';
 
 const App: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { theme, toggleTheme } = useTheme();
 
   const navLinks = [
     { path: '/', label: 'Home', icon: <HiHome size={16} /> },
@@ -63,6 +65,24 @@ const App: React.FC = () => {
                 </button>
               );
             })}
+
+            {/* ── Theme Toggle ── */}
+            <button
+              onClick={toggleTheme}
+              className="theme-toggle-btn"
+              title={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+              aria-label="Toggle theme"
+            >
+              <span className="theme-toggle-track">
+                <span className="theme-toggle-thumb">
+                  {theme === 'light' ? (
+                    <HiSun size={13} style={{ color: '#A0522D' }} />
+                  ) : (
+                    <HiMoon size={13} style={{ color: '#D4A07A' }} />
+                  )}
+                </span>
+              </span>
+            </button>
           </div>
         </div>
       </nav>
@@ -93,27 +113,42 @@ const App: React.FC = () => {
           </p>
 
           {/* Built By */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 flex-wrap justify-center">
             <span className="text-sm font-medium" style={{ color: 'var(--text-muted)', fontFamily: "'Inter', sans-serif" }}>
               Built by
             </span>
-            <a
-              href="https://github.com/Garvgoel23"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="Garvgoel23"
-            >
-              <img
-                src="https://github.com/Garvgoel23.png"
-                alt="Garvgoel23"
-                className="footer-avatar"
-              />
-            </a>
+            {[
+              { user: 'naveen5504',   label: 'Naveen'  },
+              { user: 'akshitgarg08', label: 'Akshit'  },
+              { user: 'harshbross',   label: 'Harsh'   },
+            ].map(({ user, label }) => (
+              <a
+                key={user}
+                href={`https://github.com/${user}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                title={label}
+                className="flex flex-col items-center gap-1.5 group"
+                style={{ textDecoration: 'none' }}
+              >
+                <img
+                  src={`https://github.com/${user}.png`}
+                  alt={label}
+                  className="footer-avatar"
+                />
+                <span
+                  className="text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                  style={{ color: 'var(--text-muted)', fontFamily: "'Inter', sans-serif" }}
+                >
+                  {label}
+                </span>
+              </a>
+            ))}
           </div>
 
           {/* Source Button */}
           <a
-            href="https://github.com/Garvgoel23/AI-Resume-Screening-System"
+            href="https://github.com/naveen5504/Skill-Match"
             target="_blank"
             rel="noopener noreferrer"
             className="source-btn"

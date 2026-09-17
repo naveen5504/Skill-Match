@@ -205,3 +205,55 @@
   transform: translateY(-1px);
 }
 
+/* ── Theme Toggle Button ─────────────────────────────────── */
+.theme-toggle-btn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  outline: none;
+  flex-shrink: 0;
+}
+
+.theme-toggle-track {
+  display: flex;
+  align-items: center;
+  width: 52px;
+  height: 28px;
+  border-radius: 999px;
+  border: 1px solid var(--border-secondary);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-card);
+  position: relative;
+  transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+  padding: 0 3px;
+}
+
+[data-theme="dark"] .theme-toggle-track {
+  background: var(--bg-elevated);
+  border-color: var(--border-secondary);
+}
+
+.theme-toggle-btn:hover .theme-toggle-track {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px rgba(160, 82, 45, 0.1);
+}
+
+.theme-toggle-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent-warm), var(--accent-primary));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 3px;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.35s ease;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .theme-toggle-thumb {
+  transform: translateX(24px);
+  background: linear-gradient(135deg, #3D352C, var(--accent-primary));
+}
