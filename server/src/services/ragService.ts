@@ -136,7 +136,7 @@ ${resumeText.slice(0, 4000)}
 
 Return ONLY the JSON object:`;
 
-  const raw = await chat(prompt, { temperature: 0.2 });
+  const raw = await chat(prompt, { temperature: 0.2, format: 'json' });
 
   // Extract JSON from the response (LLM might wrap it in code fences)
   const jsonMatch = raw.match(/\{[\s\S]*\}/);

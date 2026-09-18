@@ -111,14 +111,14 @@ export async function embedBatch(texts: string[]): Promise<number[][]> {
  */
 export async function chat(
   prompt: string,
-  options?: { temperature?: number; model?: string }
+  options?: { temperature?: number; model?: string; format?: string }
 ): Promise<string> {
   const model = options?.model || CHAT_MODEL;
   const temperature = options?.temperature ?? 0.2;
 
   console.log(`🤖 Sending to Ollama [${model}]…`);
 
-  const data = await ollamaFetch<OllamaGenerateResponse>('/api/generate', {
+  const payload: any = {
     model,
     prompt,
     stream: false,
@@ -126,7 +126,13 @@ export async function chat(
       temperature,
       num_predict: 4096, // max tokens to generate
     },
-  });
+  };
+  
+  if (options?.format) {
+    payload.format = options.format;
+  }
+
+  const data = await ollamaFetch<OllamaGenerateResponse>('/api/generate', payload);
 
   console.log('✅ Ollama response received.');
   return data.response || '';
